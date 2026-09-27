@@ -1,12 +1,13 @@
 """Configuration tab: PTS inputs, graph configuration, and run controls."""
 
+import re
 from pathlib import Path
 
 from PyQt5.QtCore import Qt, QEvent, pyqtSignal
 from PyQt5.QtGui import QStandardItem, QStandardItemModel, QTextCursor
 from PyQt5.QtWidgets import (
     QCheckBox, QComboBox, QFileDialog, QFormLayout, QGroupBox, QHBoxLayout,
-    QLabel, QLineEdit, QListView, QMessageBox, QPlainTextEdit, QProgressBar,
+    QAbstractItemView, QLabel, QLineEdit, QListView, QListWidget, QMessageBox, QPlainTextEdit, QProgressBar,
     QPushButton, QScrollArea, QVBoxLayout, QWidget,
 )
 
@@ -125,8 +126,7 @@ class ConfigTab(QWidget):
         group = QGroupBox("File Paths")
         form = QFormLayout(group)
 
-        self.csv_input = QLineEdit(str(settings.RAW_DATA))
-        form.addRow("Upload Char Data CSV:", self._path_row(self.csv_input, self._browse_csv))
+        form.addRow("Char run files:", self._build_run_files_list())
 
         # self.analyzer_input = QLineEdit(str(settings.PTS_ANALYZER))
         # form.addRow(
@@ -140,6 +140,37 @@ class ConfigTab(QWidget):
             self._path_row(self.project_input, self._browse_project),
         )
         return group
+
+    def _build_run_files_list(self):
+        """List of char-run (batch) files; each is analysed, then all are merged."""
+        self.run_files = QListWidget()
+        self.run_files.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.run_files.setMinimumHeight(110)
+        self.run_files_count = QLabel()
+        self.run_files_count.setObjectName("hint")
+
+        add_btn = QPushButton("Add Files")
+        add_btn.clicked.connect(self._browse_run_files)
+        remove_btn = QPushButton("Remove Selected")
+        remove_btn.clicked.connect(self._remove_run_files)
+        clear_btn = QPushButton("Clear")
+        clear_btn.clicked.connect(self._clear_run_files)
+
+        buttons = QHBoxLayout()
+        buttons.setContentsMargins(0, 0, 0, 0)
+        for btn in (add_btn, remove_btn, clear_btn):
+            buttons.addWidget(btn)
+        buttons.addStretch(1)
+        buttons.addWidget(self.run_files_count)
+
+        column = QVBoxLayout()
+        column.setContentsMargins(0, 0, 0, 0)
+        column.addWidget(self.run_files)
+        column.addLayout(buttons)
+        wrapper = QWidget()
+        wrapper.setLayout(column)
+        self._refresh_run_files_count()
+        return wrapper
 
     def _path_row(self, line_edit, handler):
         row = QHBoxLayout()
@@ -319,12 +350,42 @@ class ConfigTab(QWidget):
         return key.replace("_", " ").title() + ":"
 
     # -- browse handlers -------------------------------------------------
-    def _browse_csv(self):
-        name, _ = QFileDialog.getOpenFileName(
-            self, "Select CSV", str(settings.INPUT_DIR), "CSV Files (*.csv)"
+    def _browse_run_files(self):
+        names, _ = QFileDialog.getOpenFileNames(
+            self, "Select char run files", str(settings.INPUT_DIR),
+            "Char data (*.csv *.xlsx *.xls *.xlsm);;CSV Files (*.csv);;"
+            "Excel Files (*.xlsx *.xls *.xlsm)",
         )
-        if name:
-            self.csv_input.setText(name)
+        if not names:
+            return
+        paths = {str(Path(p)) for p in self._run_file_paths()}
+        paths.update(str(Path(n)) for n in names)
+        # Natural sort so "Run 2" comes before "Run 10".
+        ordered = sorted(paths, key=_natural_key)
+        self.run_files.clear()
+        self.run_files.addItems(ordered)
+        self._refresh_run_files_count()
+
+    def _remove_run_files(self):
+        for item in self.run_files.selectedItems():
+            self.run_files.takeItem(self.run_files.row(item))
+        self._refresh_run_files_count()
+
+    def _clear_run_files(self):
+        self.run_files.clear()
+        self._refresh_run_files_count()
+
+    def _run_file_paths(self):
+        return [
+            Path(self.run_files.item(row).text())
+            for row in range(self.run_files.count())
+        ]
+
+    def _refresh_run_files_count(self):
+        count = self.run_files.count()
+        self.run_files_count.setText(
+            f"{count} run file(s) selected" if count else "No files selected"
+        )
 
     def _browse_analyzer(self):
         name, _ = QFileDialog.getOpenFileName(
@@ -394,6 +455,10 @@ class ConfigTab(QWidget):
             self.cpk_usl_fields[metric] = usl
 
     def build_config(self):
+        run_files = self._run_file_paths()
+        if not run_files:
+            raise ValueError("Add at least one char run file (CSV or Excel).")
+
         pts_values = {k: le.text() for k, le in self.inputs.items()}
         pts_values["sensor_type"] = self.sensor_type.currentText()
         pts_values["pressure_unit"] = self.pressure_unit.currentText()
@@ -425,7 +490,9 @@ class ConfigTab(QWidget):
         config = PipelineConfig(
             pts=pts,
             graph=graph,
-            raw_data=self.csv_input.text().strip(),
+            raw_data=run_files[0],
+            raw_data_files=run_files,
+            runs_dir=output_dir / settings.RUNS_DIR.name,
             pts_analyzer=str(settings.PTS_ANALYZER),
             processed_input=output_dir / settings.PROCESSED_INPUT.name,
             data_output=output_dir / settings.DATA_OUTPUT.name,
@@ -483,3 +550,8 @@ class ConfigTab(QWidget):
     def _set_running(self, running):
         self.run_btn.setEnabled(not running)
         self.cancel_btn.setEnabled(running)
+
+
+def _natural_key(path):
+    name = Path(path).name.lower()
+    return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", name)]

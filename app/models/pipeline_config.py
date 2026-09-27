@@ -6,7 +6,7 @@ directory or on module-level globals, which was a source of crashes before.
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from app.config import settings
 from app.models.graph_config import GraphConfig
@@ -18,8 +18,10 @@ class PipelineConfig:
     pts: PTSConfig
     graph: GraphConfig = field(default_factory=GraphConfig)
 
-    # Inputs
+    # Inputs. ``raw_data_files`` holds every char-run (batch) file; when it is
+    # empty the single ``raw_data`` file is used.
     raw_data: Path = field(default_factory=lambda: Path(settings.RAW_DATA))
+    raw_data_files: List[Path] = field(default_factory=list)
     pts_analyzer: Path = field(default_factory=lambda: Path(settings.PTS_ANALYZER))
 
     # Outputs
@@ -34,6 +36,9 @@ class PipelineConfig:
     distribution_rtf: Path = field(
         default_factory=lambda: Path(settings.DISTRIBUTION_RTF)
     )
+    # Per-run workbooks (Processed Input + Data + Stacked Data for one batch).
+    # Defaults to a "runs" folder beside the master report.
+    runs_dir: Optional[Path] = None
 
     # Behaviour flags
     run_minitab: bool = True
@@ -49,18 +54,29 @@ class PipelineConfig:
             "stacked_output",
             "project_file",
             "distribution_rtf",
+            "runs_dir",
         ):
             value = getattr(self, name)
             if value is not None:
                 setattr(self, name, Path(value))
+        self.raw_data_files = [Path(p) for p in self.raw_data_files]
+        if self.runs_dir is None:
+            self.runs_dir = self.data_output.parent / settings.RUNS_DIR.name
+
+    @property
+    def input_files(self) -> List[Path]:
+        """Every char file to analyse, in run order."""
+        return list(self.raw_data_files) or [self.raw_data]
 
     def validate(self) -> None:
         """Validate configs and that required input files exist."""
         self.pts.validate()
         self.graph.validate()
 
-        if not self.raw_data.exists():
-            raise ConfigError(f"CSV file not found:\n{self.raw_data}")
+        files = self.input_files
+        missing = [str(p) for p in files if not p.exists()]
+        if missing:
+            raise ConfigError("Char data file(s) not found:\n" + "\n".join(missing))
         if not self.pts_analyzer.exists():
             raise ConfigError(
                 f"PTS analyzer workbook not found:\n{self.pts_analyzer}"
@@ -75,3 +91,4 @@ class PipelineConfig:
             self.distribution_rtf,
         ):
             out.parent.mkdir(parents=True, exist_ok=True)
+        self.runs_dir.mkdir(parents=True, exist_ok=True)

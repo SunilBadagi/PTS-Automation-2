@@ -17,12 +17,15 @@ BASE_DIR = (
 INPUT_DIR = BASE_DIR / "input"
 OUTPUT_DIR = BASE_DIR / "output"
 GRAPHS_DIR = OUTPUT_DIR / "graphs"
+# One workbook per char run (batch) lands here before the runs are merged.
+RUNS_DIR = OUTPUT_DIR / "runs"
 
 # Default input files (used only as pre-filled suggestions in the UI).
 PTS_ANALYZER = INPUT_DIR / "PTS_Dev.xlsm"
 RAW_DATA = INPUT_DIR / "rel2_1_bar_test.csv"
 
-# Pipeline output workbook. It contains Processed Input, Data, and Stacked Data.
+# Master output workbook: Data and Stacked Data merged across every char run,
+# plus a Run Summary sheet. Each run's own workbook is kept in RUNS_DIR.
 REPORT_OUTPUT = OUTPUT_DIR / "PTS_report.xlsx"
 PROCESSED_INPUT = REPORT_OUTPUT
 DATA_OUTPUT = REPORT_OUTPUT
@@ -36,7 +39,7 @@ def ensure_directories() -> None:
 
     Safe to call repeatedly; never raises if the folders already exist.
     """
-    for directory in (OUTPUT_DIR, GRAPHS_DIR):
+    for directory in (OUTPUT_DIR, GRAPHS_DIR, RUNS_DIR):
         directory.mkdir(parents=True, exist_ok=True)
 
 

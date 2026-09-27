@@ -24,12 +24,15 @@ DEFAULT_PTS = dict(
 )
 
 
-def build_default_config(raw_data=None, project_file=None, run_minitab=True):
+def build_default_config(raw_data=None, project_file=None, run_minitab=True,
+                         raw_data_files=None):
     """Assemble a PipelineConfig from defaults, overriding a couple of paths."""
     pts = PTSConfig(**DEFAULT_PTS)
     config = PipelineConfig(pts=pts, graph=GraphConfig(), run_minitab=run_minitab)
     if raw_data is not None:
         config.raw_data = raw_data
+    if raw_data_files:
+        config.raw_data_files = list(raw_data_files)
     if project_file is not None:
         config.project_file = project_file
     config.__post_init__()  # re-normalise overridden paths
@@ -64,7 +67,10 @@ def run_pipeline(config=None, raw_data=None, project_file=None, run_minitab=True
     return result
 
 
-def run():
+def run(raw_data_files=None):
+    """Run once with defaults; ``raw_data_files`` are the char run files to merge."""
+    if raw_data_files:
+        return run_pipeline(build_default_config(raw_data_files=raw_data_files))
     return run_pipeline()
 
 

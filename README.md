@@ -1,8 +1,13 @@
 # PTS Automation
 
-Takes a raw chamber **CSV**, drives the **PTS analyzer** VBA macros in Excel to
-produce the `Data` and `Stacked Data` sheets, then pushes those into **Minitab**
-to generate the configured graphs.
+Takes one or more raw chamber **char run files** (CSV or Excel), drives the
+**PTS analyzer** VBA macros in Excel on each one to produce its `Data` and
+`Stacked Data` sheets, merges every run into one master data set, then pushes
+that into **Minitab** to generate the configured graphs.
+
+Char is run in batches (e.g. 30 or 60 sensors per chamber run) because of
+hardware limits, so a 100-200 sensor population arrives as several run files.
+Add them all in the UI and they are analysed one by one and stacked together.
 
 ## Run
 
@@ -10,6 +15,7 @@ to generate the configured graphs.
 pip install -r requirements.txt
 python run.py              # launch the GUI
 python run.py --headless   # run once with defaults, no GUI
+python run.py --headless "Run 1.csv" "Run 2.xlsx"   # analyse + merge these runs
 ```
 
 ## Build a Windows executable
@@ -27,15 +33,27 @@ macro stage, and Minitab is required for Minitab graph generation.
 ## Pipeline
 
 ```
-CSV ──► preprocess ──► Excel/VBA macros ──► extract sheets ──► Minitab graphs
+for each run file:  preprocess ──► Excel/VBA macros ──► extract sheets
+then:               merge runs ──► TEB range columns ──► Minitab graphs
 ```
 
 The whole run happens on a **background thread** (`ui/worker.py`), so the window
 never freezes. Progress and a live log stream to the UI, and the run can be
 cancelled between stages.
 
-The pipeline writes one workbook, `output/PTS_report.xlsx`, containing the
-`Processed Input`, `Data`, and `Stacked Data` worksheets.
+Outputs:
+
+- `output/runs/NN_<run file>.xlsx`: one workbook per run with its
+  `Processed Input`, `Data`, and `Stacked Data` sheets.
+- `output/PTS_report.xlsx`: the master workbook, with `Data` and
+  `Stacked Data` merged across all runs (a `Char Run` column says which run
+  each row came from) plus a `Run Summary` sheet. Minitab uses this workbook.
+
+If one run file fails, the rest are still merged and the failure is reported.
+A warning is logged if a serial number appears in more than one run.
+
+Char file layout: row 1 = sensor / part name, row 2 = column headings,
+data from row 3. Files whose header is already on row 1 are also accepted.
 
 In the UI's **ASIC Conversion** section, select `ASIC 3224` to convert raw
 pressure counts using `counts / 2^24 * 100`. `ELMOS` uses the existing
@@ -57,7 +75,7 @@ conversion and is selected by default.
   Excel, even on error — no orphaned `EXCEL.EXE` processes.
 - **Minitab absent** (e.g. dev machines) is handled gracefully: graphing is
   skipped with a warning and the Excel outputs are still produced.
-- **CSV parsing** tolerates both known layouts (with/without a part-number
+- **Char file parsing** (CSV or Excel) tolerates both known layouts (with/without a part-number
   banner line) and the duplicated pressure column.
 - **Paths** never depend on the current working directory.
 - The embedded Excel/Minitab **ActiveX views load lazily** and are guarded, so
