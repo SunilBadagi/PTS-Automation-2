@@ -1,0 +1,6 @@
+pandas
+openpyxl
+numpy
+loguru
+PyQt5
+pywin32

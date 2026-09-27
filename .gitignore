@@ -1,0 +1,12 @@
+# Python bytecode and cache directories
+**/__pycache__/
+*.py[cod]
+
+# PyInstaller build output
+build/
+dist/
+*.spec
+/dist.zip
+
+# Remove already-tracked cache files from Git:
+# git rm -r --cached .; git add .

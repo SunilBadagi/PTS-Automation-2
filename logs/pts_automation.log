@@ -1,0 +1,281 @@
+2026-09-07 22:30:55 | INFO | TEB range from columns: ['TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C']
+2026-09-07 22:30:55 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 22:30:55 | INFO | TEB range from columns: ['TEB @ -40C', 'TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C', 'TEB @ 110C']
+2026-09-07 22:35:57 | INFO | Starting pipeline
+2026-09-07 22:35:57 | INFO | Preprocessing CSV
+2026-09-07 22:35:57 | INFO | Reading raw chamber file: C:\Users\H660735\Downloads\X141804EABP2\X141804EABP2\Char Data before Reflow\Run 1_all temp char_before reflow_A001 to A040_PTS 5_70262_14AUG2026.csv
+2026-09-07 22:35:57 | INFO | Part Number: DAP port mbar
+2026-09-07 22:35:59 | INFO | Processed 2520 rows -> C:\Users\H660735\Downloads\minitab_automation\processed_input.xlsx
+2026-09-07 22:35:59 | INFO | Opening PTS analyzer in Excel
+2026-09-07 22:35:59 | INFO | Starting Excel
+2026-09-07 22:36:05 | INFO | Workbook opened: PTS_Dev.xlsm
+2026-09-07 22:36:05 | INFO | Applying transfer-function inputs
+2026-09-07 22:36:05 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 22:36:05 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 22:36:07 | INFO | Running macro: AllTempAnalysis
+2026-09-07 22:36:07 | INFO | Running macro: AllTempAnalysis
+2026-09-07 22:36:24 | INFO | Saving workbook
+2026-09-07 22:36:26 | INFO | Workbook saved
+2026-09-07 22:36:28 | INFO | Excel closed
+2026-09-07 22:36:28 | INFO | Extracting Data and Stacked Data sheets
+2026-09-07 22:36:28 | INFO | Extracting sheet 'Data'
+2026-09-07 22:36:29 | INFO | Wrote 40 rows to C:\Users\H660735\Downloads\minitab_automation\data_sheet.xlsx
+2026-09-07 22:36:29 | INFO | Extracting sheet 'Stacked Data'
+2026-09-07 22:36:29 | INFO | Wrote 360 rows to C:\Users\H660735\Downloads\minitab_automation\stacked_data.xlsx
+2026-09-07 22:36:29 | INFO | Computing 3 TEB range column(s)
+2026-09-07 22:36:29 | INFO | TEB range from columns: ['TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C']
+2026-09-07 22:36:29 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 22:36:29 | WARNING | TEB range: no column matched temperatures [-40, 110]. Available: [-20.0, 0.0, 10.0, 25.0, 50.0, 70.0, 85.0]
+2026-09-07 22:36:29 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 22:36:29 | INFO | Preparing Minitab graphs
+2026-09-07 22:36:30 | INFO | Loading extracted data
+2026-09-07 22:36:30 | INFO | Connecting to Minitab
+2026-09-07 22:36:53 | INFO | Worksheet 'Stacked Data' loaded: 8 cols x 360 rows
+2026-09-07 22:37:06 | INFO | Worksheet 'Data Analysis' loaded: 65 cols x 40 rows
+2026-09-07 22:37:06 | INFO | Building scatter plots
+2026-09-07 22:37:06 | INFO | Scatter: TEB (%FSS) vs Temperature (Deg C)
+2026-09-07 22:37:07 | INFO | Scatter: Offset Error (%FSS) vs Temperature (Deg C)
+2026-09-07 22:37:07 | INFO | Scatter: Span Error (%FSS) vs Temperature (Deg C)
+2026-09-07 22:37:07 | INFO | Building histograms
+2026-09-07 22:37:08 | INFO | Histogram: TEB @(0-50)
+2026-09-07 22:37:08 | INFO | Histogram: TEB @(-20 - 85)
+2026-09-07 22:37:08 | INFO | Histogram: TEB @(-40 - 110)
+2026-09-07 22:37:09 | INFO | Histogram: Accuracy Error
+2026-09-07 22:37:09 | INFO | Distribution identification
+2026-09-07 22:37:09 | INFO | Distribution ID: TEB @(0-50)
+2026-09-07 22:37:10 | INFO | Distribution ID: TEB @(-20 - 85)
+2026-09-07 22:37:10 | INFO | Distribution ID: TEB @(-40 - 110)
+2026-09-07 22:37:10 | INFO | Distribution ID: Accuracy Error
+2026-09-07 22:37:11 | WARNING | Could not save output document: (-2147352567, 'Exception occurred.', (0, 'Mtb.Application.1', 'IOutputDocument: File: C:\\Users\\H660735\\Downloads\\minitab_automation\\distribution.rtf already exists', None, 0, -2147467259), None)
+2026-09-07 22:37:11 | INFO | Cpk / capability analysis
+2026-09-07 22:37:11 | INFO | Cpk: TEB @(0-50) (USL=3.5, LSL=None)
+2026-09-07 22:37:11 | INFO | Cpk: TEB @(-20 - 85) (USL=3.5, LSL=None)
+2026-09-07 22:37:12 | INFO | Cpk: TEB @(-40 - 110) (USL=0.4, LSL=None)
+2026-09-07 22:37:12 | INFO | Cpk: Accuracy Error (USL=3.5, LSL=None)
+2026-09-07 22:37:12 | INFO | Saving Minitab project
+2026-09-07 22:37:13 | INFO | Project saved: C:\Users\H660735\Downloads\minitab_automation\Minitab_Project_20260907_223712.mpx
+2026-09-07 22:37:13 | INFO | Minitab graphing complete
+2026-09-07 22:37:19 | INFO | Pipeline finished
+2026-09-07 22:42:56 | INFO | Reading raw chamber file: C:\Users\H660735\AppData\Local\Temp\tmp_cvrhmk9\input.csv
+2026-09-07 22:42:56 | INFO | Part Number: Part-123
+2026-09-07 22:42:58 | INFO | Processed 1 rows -> C:\Users\H660735\AppData\Local\Temp\tmp_cvrhmk9\PTS_report.xlsx
+2026-09-07 22:43:13 | INFO | Reading raw chamber file: C:\Users\H660735\AppData\Local\Temp\tmp0khuobhc\input.csv
+2026-09-07 22:43:13 | INFO | Part Number: Part-123
+2026-09-07 22:43:13 | INFO | Processed 1 rows -> C:\Users\H660735\AppData\Local\Temp\tmp0khuobhc\PTS_report.xlsx
+2026-09-07 22:43:13 | INFO | Extracting sheet 'Data'
+2026-09-07 22:43:13 | INFO | Wrote 1 rows to C:\Users\H660735\AppData\Local\Temp\tmp0khuobhc\PTS_report.xlsx
+2026-09-07 22:43:13 | INFO | Extracting sheet 'Stacked Data'
+2026-09-07 22:43:13 | INFO | Wrote 1 rows to C:\Users\H660735\AppData\Local\Temp\tmp0khuobhc\PTS_report.xlsx
+2026-09-07 22:47:56 | INFO | Starting pipeline
+2026-09-07 22:47:56 | INFO | Preprocessing CSV
+2026-09-07 22:47:56 | INFO | Reading raw chamber file: C:\Users\H660735\Downloads\X141804EABP2\X141804EABP2\Char Data before Reflow\Run 1_all temp char_before reflow_A001 to A040_PTS 5_70262_14AUG2026.csv
+2026-09-07 22:47:56 | INFO | Part Number: DAP port mbar
+2026-09-07 22:47:58 | INFO | Processed 2520 rows -> C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 22:47:58 | INFO | Opening PTS analyzer in Excel
+2026-09-07 22:47:58 | INFO | Starting Excel
+2026-09-07 22:48:03 | INFO | Workbook opened: PTS_Dev.xlsm
+2026-09-07 22:48:03 | INFO | Applying transfer-function inputs
+2026-09-07 22:48:03 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 22:48:03 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 22:48:05 | INFO | Running macro: AllTempAnalysis
+2026-09-07 22:48:05 | INFO | Running macro: AllTempAnalysis
+2026-09-07 22:48:13 | INFO | Saving workbook
+2026-09-07 22:48:14 | INFO | Workbook saved
+2026-09-07 22:48:14 | INFO | Excel closed
+2026-09-07 22:48:14 | INFO | Extracting Data and Stacked Data sheets
+2026-09-07 22:48:14 | INFO | Extracting sheet 'Data'
+2026-09-07 22:48:15 | INFO | Wrote 40 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 22:48:15 | INFO | Extracting sheet 'Stacked Data'
+2026-09-07 22:48:15 | INFO | Wrote 360 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 22:48:15 | INFO | Computing 3 TEB range column(s)
+2026-09-07 22:48:16 | INFO | TEB range from columns: ['TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C']
+2026-09-07 22:48:16 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 22:48:16 | WARNING | TEB range: no column matched temperatures [-40, 110]. Available: [-20.0, 0.0, 10.0, 25.0, 50.0, 70.0, 85.0]
+2026-09-07 22:48:16 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 22:48:16 | INFO | Preparing Minitab graphs
+2026-09-07 22:48:16 | INFO | Loading extracted data
+2026-09-07 22:48:16 | INFO | Connecting to Minitab
+2026-09-07 22:48:31 | INFO | Worksheet 'Stacked Data' loaded: 8 cols x 360 rows
+2026-09-07 22:48:41 | INFO | Worksheet 'Data Analysis' loaded: 65 cols x 40 rows
+2026-09-07 22:48:41 | INFO | Building scatter plots
+2026-09-07 22:48:41 | INFO | Scatter: TEB (%FSS) vs Temperature (Deg C)
+2026-09-07 22:48:41 | INFO | Scatter: Offset Error (%FSS) vs Temperature (Deg C)
+2026-09-07 22:48:42 | INFO | Scatter: Span Error (%FSS) vs Temperature (Deg C)
+2026-09-07 22:48:42 | INFO | Building histograms
+2026-09-07 22:48:42 | INFO | Histogram: TEB @(0-50)
+2026-09-07 22:48:42 | INFO | Histogram: Accuracy Error
+2026-09-07 22:48:42 | INFO | Distribution identification
+2026-09-07 22:48:42 | INFO | Distribution ID: TEB @(0-50)
+2026-09-07 22:48:42 | WARNING | Could not save output document: (-2147352567, 'Exception occurred.', (0, 'Mtb.Application.1', 'IOutputDocument: File: C:\\Users\\H660735\\Downloads\\minitab_automation\\distribution.rtf already exists', None, 0, -2147467259), None)
+2026-09-07 22:48:42 | INFO | Cpk / capability analysis
+2026-09-07 22:48:43 | INFO | Cpk: TEB @(0-50) (USL=3.0, LSL=None)
+2026-09-07 22:48:43 | INFO | Saving Minitab project
+2026-09-07 22:48:43 | INFO | Project saved: C:\Users\H660735\Downloads\minitab_automation\Minitab_Project_20260907_224843.mpx
+2026-09-07 22:48:43 | INFO | Minitab graphing complete
+2026-09-07 22:48:50 | INFO | Pipeline finished
+2026-09-07 22:54:22 | INFO | Converting pressure counts using ELMOS 3224 ASIC formula.
+2026-09-07 22:54:22 | INFO | Converting pressure counts using legacy ASIC formula.
+2026-09-07 22:58:54 | INFO | Converting pressure counts using ASIC 3224 formula.
+2026-09-07 22:58:54 | INFO | Converting pressure counts using ELMOS formula.
+2026-09-07 23:00:49 | INFO | Starting pipeline
+2026-09-07 23:00:49 | INFO | Preprocessing CSV
+2026-09-07 23:00:49 | INFO | Reading raw chamber file: C:\Users\H660735\Downloads\X141804EABP2\X141804EABP2\Char Data before Reflow\Run 1_all temp char_before reflow_A001 to A040_PTS 5_70262_14AUG2026.csv
+2026-09-07 23:00:49 | INFO | Part Number: DAP port mbar
+2026-09-07 23:00:49 | INFO | Converting pressure counts using ASIC 3224 formula.
+2026-09-07 23:00:49 | INFO | Processed 2520 rows -> C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:00:49 | INFO | Opening PTS analyzer in Excel
+2026-09-07 23:00:49 | INFO | Starting Excel
+2026-09-07 23:00:53 | INFO | Workbook opened: PTS_Dev.xlsm
+2026-09-07 23:00:53 | INFO | Applying transfer-function inputs
+2026-09-07 23:00:54 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 23:00:54 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 23:00:55 | INFO | Running macro: AllTempAnalysis
+2026-09-07 23:00:55 | INFO | Running macro: AllTempAnalysis
+2026-09-07 23:01:09 | INFO | Saving workbook
+2026-09-07 23:01:10 | INFO | Workbook saved
+2026-09-07 23:01:11 | INFO | Excel closed
+2026-09-07 23:01:11 | INFO | Extracting Data and Stacked Data sheets
+2026-09-07 23:01:11 | INFO | Extracting sheet 'Data'
+2026-09-07 23:01:12 | INFO | Wrote 40 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:01:12 | INFO | Extracting sheet 'Stacked Data'
+2026-09-07 23:01:13 | INFO | Wrote 360 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:01:13 | INFO | Computing 3 TEB range column(s)
+2026-09-07 23:01:13 | INFO | TEB range from columns: ['TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C']
+2026-09-07 23:01:13 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 23:01:13 | WARNING | TEB range: no column matched temperatures [-40, 110]. Available: [-20.0, 0.0, 10.0, 25.0, 50.0, 70.0, 85.0]
+2026-09-07 23:01:13 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 23:01:13 | INFO | Preparing Minitab graphs
+2026-09-07 23:01:13 | INFO | Loading extracted data
+2026-09-07 23:01:14 | INFO | Connecting to Minitab
+2026-09-07 23:01:31 | INFO | Worksheet 'Stacked Data' loaded: 8 cols x 360 rows
+2026-09-07 23:01:44 | INFO | Worksheet 'Data Analysis' loaded: 65 cols x 40 rows
+2026-09-07 23:01:44 | INFO | Building scatter plots
+2026-09-07 23:01:44 | INFO | Scatter: TEB (%FSS) vs Temperature (Deg C)
+2026-09-07 23:01:44 | INFO | Scatter: Offset Error (%FSS) vs Temperature (Deg C)
+2026-09-07 23:01:45 | INFO | Scatter: Span Error (%FSS) vs Temperature (Deg C)
+2026-09-07 23:01:45 | INFO | Building histograms
+2026-09-07 23:01:45 | INFO | Histogram: TEB @(0-50)
+2026-09-07 23:01:46 | INFO | Histogram: Accuracy Error
+2026-09-07 23:01:46 | INFO | Distribution identification
+2026-09-07 23:01:47 | INFO | Distribution ID: TEB @(0-50)
+2026-09-07 23:01:47 | WARNING | Could not save output document: (-2147352567, 'Exception occurred.', (0, 'Mtb.Application.1', 'IOutputDocument: File: C:\\Users\\H660735\\Downloads\\minitab_automation\\distribution.rtf already exists', None, 0, -2147467259), None)
+2026-09-07 23:01:47 | INFO | Cpk / capability analysis
+2026-09-07 23:01:48 | INFO | Cpk: TEB @(0-50) (USL=3.0, LSL=None)
+2026-09-07 23:01:48 | INFO | Saving Minitab project
+2026-09-07 23:01:49 | INFO | Project saved: C:\Users\H660735\Downloads\minitab_automation\Minitab_Project_20260907_230148.mpx
+2026-09-07 23:01:49 | INFO | Minitab graphing complete
+2026-09-07 23:01:57 | INFO | Pipeline finished
+2026-09-07 23:02:45 | INFO | Starting pipeline
+2026-09-07 23:02:45 | INFO | Preprocessing CSV
+2026-09-07 23:02:45 | INFO | Reading raw chamber file: C:\Users\H660735\Downloads\X141804EABP2\X141804EABP2\Char Data before Reflow\Run 1_all temp char_before reflow_A001 to A040_PTS 5_70262_14AUG2026.csv
+2026-09-07 23:02:45 | INFO | Part Number: DAP port mbar
+2026-09-07 23:02:45 | INFO | Converting pressure counts using ELMOS formula.
+2026-09-07 23:02:45 | ERROR | Pipeline failed
+Traceback (most recent call last):
+
+  File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\app\services\excel_preprocessor.py", line 96, in _write_workbook
+    with pd.ExcelWriter(output_file, engine="openpyxl") as writer:
+         │  │           └ WindowsPath('C:/Users/H660735/Downloads/minitab_automation/PTS_report.xlsx')
+         │  └ <class 'pandas.ExcelWriter'>
+         └ <module 'pandas' from 'C:\\Sunil\\Softwares\\Report Automation Tool\\venv\\Lib\\site-packages\\pandas\\__init__.py'>
+
+  File "C:\Sunil\Softwares\Report Automation Tool\venv\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 62, in __init__
+    super().__init__(
+  File "C:\Sunil\Softwares\Report Automation Tool\venv\Lib\site-packages\pandas\io\excel\_base.py", line 1281, in __init__
+    self._handles = get_handle(
+    │    │          └ <function get_handle at 0x0000000022C6B600>
+    │    └ IOHandles(handle=WindowsPath('C:/Users/H660735/Downloads/minitab_automation/PTS_report.xlsx'), compression={'compression': No...
+    └ <pandas.io.excel._openpyxl.OpenpyxlWriter object at 0x000000002A187A80>
+  File "C:\Sunil\Softwares\Report Automation Tool\venv\Lib\site-packages\pandas\io\common.py", line 939, in get_handle
+    handle = open(handle, ioargs.mode)
+                  │       │      └ 'wb'
+                  │       └ IOArgs(filepath_or_buffer='C:\\Users\\H660735\\Downloads\\minitab_automation\\PTS_report.xlsx', encoding='utf-8', mode='wb', ...
+                  └ 'C:\\Users\\H660735\\Downloads\\minitab_automation\\PTS_report.xlsx'
+
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\H660735\\Downloads\\minitab_automation\\PTS_report.xlsx'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\ui\worker.py", line 39, in run
+    result = pipeline.run(self._config)
+             │        │   │    └ PipelineConfig(pts=PTSConfig(pressure_min=-1.0, pressure_max=1.0, output_min=10.0, output_max=90.0, supply_voltage=3.3, press...
+             │        │   └ <ui.worker.PipelineWorker object at 0x00000000233C5910>
+             │        └ <function Pipeline.run at 0x000000002335DBC0>
+             └ <app.services.pipeline.Pipeline object at 0x000000002A2D9810>
+
+> File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\app\services\pipeline.py", line 77, in run
+    self._preprocess(config)
+    │    │           └ PipelineConfig(pts=PTSConfig(pressure_min=-1.0, pressure_max=1.0, output_min=10.0, output_max=90.0, supply_voltage=3.3, press...
+    │    └ <function Pipeline._preprocess at 0x000000002335DC60>
+    └ <app.services.pipeline.Pipeline object at 0x000000002A2D9810>
+
+  File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\app\services\pipeline.py", line 111, in _preprocess
+    ExcelPreprocessor().process(
+    └ <class 'app.services.excel_preprocessor.ExcelPreprocessor'>
+
+  File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\app\services\excel_preprocessor.py", line 69, in process
+    self._write_workbook(df, part_number, output_file)
+    │    │               │   │            └ WindowsPath('C:/Users/H660735/Downloads/minitab_automation/PTS_report.xlsx')
+    │    │               │   └ 'DAP port mbar'
+    │    │               └      Serial Number       Date  ... Sensor Current (A)  Cable #
+    │    │                 0             A001  8/14/2026  ...                NaN      1_1...
+    │    └ <function ExcelPreprocessor._write_workbook at 0x0000000023264D60>
+    └ <app.services.excel_preprocessor.ExcelPreprocessor object at 0x000000002A2D9310>
+
+  File "C:\Sunil\Softwares\Report Automation Tool\PTS-Automation\app\services\excel_preprocessor.py", line 105, in _write_workbook
+    raise PreprocessError(
+          └ <class 'app.services.excel_preprocessor.PreprocessError'>
+
+app.services.excel_preprocessor.PreprocessError: Cannot write 'C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx'. Is it open in Excel? ([Errno 13] Permission denied: 'C:\\Users\\H660735\\Downloads\\minitab_automation\\PTS_report.xlsx')
+2026-09-07 23:03:00 | INFO | Starting pipeline
+2026-09-07 23:03:00 | INFO | Preprocessing CSV
+2026-09-07 23:03:00 | INFO | Reading raw chamber file: C:\Users\H660735\Downloads\X141804EABP2\X141804EABP2\Char Data before Reflow\Run 1_all temp char_before reflow_A001 to A040_PTS 5_70262_14AUG2026.csv
+2026-09-07 23:03:00 | INFO | Part Number: DAP port mbar
+2026-09-07 23:03:00 | INFO | Converting pressure counts using ELMOS formula.
+2026-09-07 23:03:01 | INFO | Processed 2520 rows -> C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:03:01 | INFO | Opening PTS analyzer in Excel
+2026-09-07 23:03:01 | INFO | Starting Excel
+2026-09-07 23:03:04 | INFO | Workbook opened: PTS_Dev.xlsm
+2026-09-07 23:03:04 | INFO | Applying transfer-function inputs
+2026-09-07 23:03:05 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 23:03:05 | INFO | Running macro: ImportDataAccFile_Auto
+2026-09-07 23:03:06 | INFO | Running macro: AllTempAnalysis
+2026-09-07 23:03:06 | INFO | Running macro: AllTempAnalysis
+2026-09-07 23:03:15 | INFO | Saving workbook
+2026-09-07 23:03:15 | INFO | Workbook saved
+2026-09-07 23:03:16 | INFO | Excel closed
+2026-09-07 23:03:16 | INFO | Extracting Data and Stacked Data sheets
+2026-09-07 23:03:16 | INFO | Extracting sheet 'Data'
+2026-09-07 23:03:16 | INFO | Wrote 40 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:03:16 | INFO | Extracting sheet 'Stacked Data'
+2026-09-07 23:03:17 | INFO | Wrote 360 rows to C:\Users\H660735\Downloads\minitab_automation\PTS_report.xlsx
+2026-09-07 23:03:17 | INFO | Computing 3 TEB range column(s)
+2026-09-07 23:03:17 | INFO | TEB range from columns: ['TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C']
+2026-09-07 23:03:17 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 23:03:17 | WARNING | TEB range: no column matched temperatures [-40, 110]. Available: [-20.0, 0.0, 10.0, 25.0, 50.0, 70.0, 85.0]
+2026-09-07 23:03:17 | INFO | TEB range from columns: ['TEB @ -20C', 'TEB @ 0C', 'TEB @ 10C', 'TEB @ 25C', 'TEB @ 25C.1', 'TEB @ 25C.2', 'TEB @ 50C', 'TEB @ 85C']
+2026-09-07 23:03:18 | INFO | Preparing Minitab graphs
+2026-09-07 23:03:18 | INFO | Loading extracted data
+2026-09-07 23:03:18 | INFO | Connecting to Minitab
+2026-09-07 23:03:32 | INFO | Worksheet 'Stacked Data' loaded: 8 cols x 360 rows
+2026-09-07 23:03:43 | INFO | Worksheet 'Data Analysis' loaded: 65 cols x 40 rows
+2026-09-07 23:03:43 | INFO | Building scatter plots
+2026-09-07 23:03:43 | INFO | Scatter: TEB (%FSS) vs Temperature (Deg C)
+2026-09-07 23:03:44 | INFO | Scatter: Offset Error (%FSS) vs Temperature (Deg C)
+2026-09-07 23:03:44 | INFO | Scatter: Span Error (%FSS) vs Temperature (Deg C)
+2026-09-07 23:03:44 | INFO | Building histograms
+2026-09-07 23:03:44 | INFO | Histogram: TEB @(0-50)
+2026-09-07 23:03:44 | INFO | Histogram: Accuracy Error
+2026-09-07 23:03:44 | INFO | Distribution identification
+2026-09-07 23:03:45 | INFO | Distribution ID: TEB @(0-50)
+2026-09-07 23:03:45 | WARNING | Could not save output document: (-2147352567, 'Exception occurred.', (0, 'Mtb.Application.1', 'IOutputDocument: File: C:\\Users\\H660735\\Downloads\\minitab_automation\\distribution.rtf already exists', None, 0, -2147467259), None)
+2026-09-07 23:03:45 | INFO | Cpk / capability analysis
+2026-09-07 23:03:45 | INFO | Cpk: TEB @(0-50) (USL=3.0, LSL=None)
+2026-09-07 23:03:45 | INFO | Saving Minitab project
+2026-09-07 23:03:45 | INFO | Project saved: C:\Users\H660735\Downloads\minitab_automation\Minitab_Project_20260907_230345.mpx
+2026-09-07 23:03:45 | INFO | Minitab graphing complete
+2026-09-07 23:03:50 | INFO | Pipeline finished
